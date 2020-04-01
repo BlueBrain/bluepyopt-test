@@ -46,6 +46,10 @@ def get_parser():
         description='HP Tuning')
     parser.add_argument('--checkpoint', required=False, default=None,
                         help='Checkpoint pickle to avoid recalculation')
+    parser.add_argument('--max_ngen', required=False, type=int, default=2,
+                        help='Max number of generations to run')
+    parser.add_argument('--offspring_size', required=False, type=int, default=4,
+                        help='Offsprint size per generation')
     return parser
 
 
@@ -56,9 +60,9 @@ def main():
                         stream=sys.stdout)
 
     opt = create_optimizer(args)
-    opt.run(max_ngen=1,
-            offspring_size=6,
-            cp_filename=args.checkpoint, 
+    opt.run(max_ngen=args.max_ngen,
+            offspring_size=args.offspring_size,
+            cp_filename=args.checkpoint,
             continue_cp=False)
 
 if __name__ == '__main__':
