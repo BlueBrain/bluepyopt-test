@@ -13,10 +13,6 @@ PWD=$(pwd)
 LOGS=$PWD/logs/${SLURM_JOBID}
 mkdir -p $LOGS
 
-# just to use modules from CI
-module purge
-unset MODULEPATH
-module use /gpfs/bbp.cscs.ch/ssd/apps/hpc/jenkins/pulls/545/modules/all
 module load unstable python-dev py-bluepyopt/1.9.27 neuron
 module list
 
