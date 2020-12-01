@@ -13,7 +13,7 @@ PWD=$(pwd)
 LOGS=$PWD/logs/${SLURM_JOBID}
 mkdir -p $LOGS
 
-module load unstable python-dev py-bluepyopt/1.9.27 neuron
+module load unstable python-dev py-bluepyopt neuron
 module list
 
 rm -rf x86_64
