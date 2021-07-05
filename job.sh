@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --constraint="cpu|nvme"
+#SBATCH --constraint="cpu"
 #SBATCH --ntasks=6
 #SBATCH --partition=prod
 #SBATCH --job-name=bluepyopt_test
