@@ -104,9 +104,15 @@ VERBATIM
 #include<stdlib.h>
 #include<stdio.h>
 #include<math.h>
+#ifndef NRN_VERSION_GTEQ_8_2_0
+#include "nrnran123.h"
 
 double nrn_random_pick(void* r);
 void* nrn_random_arg(int argpos);
+#define RANDCAST
+#else
+#define RANDCAST (Rand*)
+#endif
 
 ENDVERBATIM
   
@@ -307,7 +313,7 @@ VERBATIM
                 : each instance. However, the corresponding hoc Random
                 : distribution MUST be set to Random.uniform(1)
                 */
-                value = nrn_random_pick(_p_rng);
+                value = nrn_random_pick(RANDCAST _p_rng);
                 //printf("random stream for this simulation = %lf\n",value);
                 return value;
         }else{
@@ -316,7 +322,10 @@ ENDVERBATIM
                 : independent of nhost or which host this instance is on
                 : is desired, since each instance on this cpu draws from
                 : the same stream
-                urand = scop_random(1)
+                : value = scop_random(1)
+                : Above shouldn't be used anymore, so changing this similarly
+                : to the updated mod files
+                value = 0.0
 VERBATIM
         }
 ENDVERBATIM
